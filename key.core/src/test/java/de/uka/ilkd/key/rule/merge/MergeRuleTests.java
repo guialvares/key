@@ -27,6 +27,7 @@ import de.uka.ilkd.key.util.ProofStarter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -235,6 +236,23 @@ public class MergeRuleTests {
 
         assertTrue(proof.closed());
         Assertions.assertEquals(1, proof.getStatistics().mergeRuleApps);
+    }
+
+    @Test
+    public void testSimple() {
+        final Proof proof  = loadProof(TEST_RESOURCES_DIR_PREFIX, "simple.proof");
+
+        startAutomaticStrategy(proof);
+        assertTrue(proof.closed());
+    }
+
+    @Test
+    public void testImpossible() {
+        final Proof proof =
+                loadProof(TEST_RESOURCES_DIR_PREFIX, "impossible.proof");
+
+        startAutomaticStrategy(proof);
+        assertTrue(proof.closed());
     }
 
     /**
